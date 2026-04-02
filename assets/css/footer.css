@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'village-pm';
-    src: url('../fonts/Columbia-Serial\ Regular.ttf') format('truetype');
+    src: url('../fonts/Columbia-Serial Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -14,7 +14,6 @@ body {
 }
 
 footer {
-  background: #121212;
   padding: 48px 60px 0;
   min-height: 100vh;
   display: flex;
@@ -32,10 +31,7 @@ footer {
 
 #clock {
   font-size: 14px;
-  font-weight: 400;
   letter-spacing: 0.04em;
-  color: #F9F7F4;
-  font-variant-numeric: 'village-pm', sans-serif;
 }
 
 .greeting-badge {
@@ -43,15 +39,13 @@ footer {
   border-radius: 999px;
   padding: 6px 18px;
   font-size: 14px;
-  color: #F9F7F4;
-  font-weight: 400;
   letter-spacing: 0.02em;
 }
 
 /* ── Navigation ── */
 .footer-nav {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   gap: 24px;
   align-items: start;
   margin-bottom: 220px;
@@ -67,7 +61,6 @@ footer {
   text-decoration: none;
   color: #F9F7F4;
   font-size: 14px;
-  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.8;
@@ -85,7 +78,6 @@ footer {
 
 .newsletter-label {
   font-size: 14px;
-  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -117,38 +109,11 @@ footer {
   color: #F9F7F4;
   font-size: 14px;
   cursor: pointer;
-  opacity: 0.8;
   transition: opacity 0.2s, transform 0.2s;
   padding: 0;
 }
 
-.arrow-btn:hover { opacity: 1; transform: translateX(3px); }
-
-/* ── Pays ── */
-.country-col {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.country-col:hover { opacity: 0.6; }
-
-/* ── Grand logo ── */
-.footer-logo {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  line-height: 0.85;
-  overflow: hidden;
-}
-
-.logo{
-  width: 100%;
-  margin-bottom: 70px;
-}
+.arrow-btn:hover { opacity: 0.6; transform: translateX(3px); }
 
 /* ── Country Dropdown ── */
 .country-wrapper {
@@ -160,18 +125,18 @@ footer {
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: opacity 0.2s;
   user-select: none;
+  transition: opacity 0.2s;
 }
+
+.country-col:hover { opacity: 0.5; }
 
 .country-arrow {
   font-size: 10px;
   transition: transform 0.3s ease;
-  display: inline-block;
 }
 
 .country-wrapper.open .country-arrow {
@@ -183,7 +148,6 @@ footer {
   top: calc(100% + 12px);
   left: 0;
   background: #F9F7F4;
-  border: 1px solid rgba(255,255,255,0.12);
   padding: 8px 0;
   min-width: 220px;
   z-index: 100;
@@ -203,31 +167,36 @@ footer {
   display: block;
   padding: 10px 18px;
   font-size: 13px;
-  font-weight: 400;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #1e1e1e;
+  color: #121212;
+  transition: opacity 0.15s;
 }
 
-.country-dropdown a:hover {
-  color: #1e1e1e;
+.country-dropdown a:hover { opacity: 0.5; }
+
+/* ── Logo ── */
+.footer-logo { overflow: hidden; }
+
+.logo {
+  width: 100%;
+  display: block;
+  margin-bottom: 70px;
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .footer-nav{
-    display: inline-block;
-  }
-  .nav-col, .newsletter-col{
-    padding-bottom: 40px;
-  }
+  footer { padding: 48px 24px 0; }
 
-  .footer-top{
-    justify-content: center;
-  }
+  .footer-top { justify-content: center; }
 
-  .footer-nav{
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 70px;
   }
+
+  .nav-col,
+  .newsletter-col { padding-bottom: 40px; }
 }
