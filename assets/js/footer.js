@@ -39,3 +39,5 @@ dropdown.querySelectorAll('a').forEach(link => {
 document.addEventListener('click', () => {
   wrapper.classList.remove('open');
 });
+
+
