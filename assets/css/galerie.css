@@ -4,16 +4,6 @@ body, html {
     overflow-x: hidden;
 }
 
-.spacer {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    background-color: #222;
-    color: white;
-}
-
 .galerie-section {
     height: 100vh;
     display: flex;
