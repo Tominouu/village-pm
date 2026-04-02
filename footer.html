@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="assets/css/footer.css">
 </head>
 <body>
-
 <footer>
   <div>
     <div class="footer-top">
@@ -34,8 +33,19 @@
           <button class="arrow-btn">→</button>
         </div>
       </div>
-      <div class="nav-col">
-        <span class="country-col">France (€EUR)</span>
+      <div class="nav-col country-wrapper">
+        <span class="country-col" id="country-toggle">
+          <span id="country-label">France (€EUR)</span>
+          <span class="country-arrow">↓</span>
+        </span>
+        <div class="country-dropdown" id="country-dropdown">
+          <a href="#" data-country="France (€EUR)">France (€EUR)</a>
+          <a href="#" data-country="United States ($USD)">United States ($USD)</a>
+          <a href="#" data-country="United Kingdom (£GBP)">United Kingdom (£GBP)</a>
+          <a href="#" data-country="German (€EUR)">German (€EUR)</a>
+          <a href="#" data-country="Italy (€EUR)">Italy (€EUR)</a>
+          <a href="#" data-country="Japan (¥JPY)">Japan (¥JPY)</a>
+        </div>
       </div>
     </nav>
   </div>
@@ -43,25 +53,6 @@
     <img class="logo" src="assets/img/village-pm-white.png" alt="">
   </div>
 </footer>
-
-<script>
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function getGreeting(h) {
-    if (h < 12) return 'Good morning';
-    if (h < 18) return 'Good afternoon';
-    return 'Good evening';
-  }
-
-  function tick() {
-    const now = new Date();
-    const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
-    document.getElementById('clock').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-    document.getElementById('greeting').textContent = getGreeting(h);
-  }
-
-  tick();
-  setInterval(tick, 1000);
-</script>
 </body>
 </html>
+<script src="assets/js/footer.js"></script>
