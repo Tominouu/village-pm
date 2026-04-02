@@ -145,3 +145,24 @@ header {
     font-size: 31px;
 }
 
+.section-titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'village-pm', sans-serif;
+}
+
+.section-titles h1 {
+    font-size: 50px;
+}
+
+.section-titles p {
+    max-width: 500px;
+    text-align: center;
+    margin: 0 auto;
+
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.4;
+}
+
+
