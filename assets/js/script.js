@@ -44,7 +44,7 @@ window.addEventListener("resize", resizeCanvas)
 const frameCount = 120
 
 const currentFrame = (index) =>
-  `./images/${String(index).padStart(4, "0")}.png`
+  `../../test-anim/images/${String(index).padStart(4, "0")}.png`
 
 const images = []
 const obj = { frame: 1, zoom: 1 }
@@ -104,7 +104,7 @@ gsap.to(obj, {
   frame: frameCount,
   ease: "power1.out",
   scrollTrigger: {
-    trigger: "body",
+    trigger: ".scroll-3d",
     start: "top top",
     end: "bottom bottom",
     scrub: 1.5 // ULTRA SMOOTH 🔥
@@ -118,7 +118,7 @@ gsap.to(obj, {
 gsap.to(obj, {
   zoom: 1.2,
   scrollTrigger: {
-    trigger: "body",
+    trigger: ".scroll-3d",
     start: "top top",
     end: "bottom bottom",
     scrub: 1.5
