@@ -1,0 +1,202 @@
+@font-face {
+    font-family: 'village-pm';
+    src: url('../fonts/Columbia-Serial Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #121212;
+  color: #F9F7F4;
+  font-family: 'village-pm', sans-serif;
+}
+
+footer {
+  padding: 48px 60px 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Horloge ── */
+.footer-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+#clock {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.greeting-badge {
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 999px;
+  padding: 6px 18px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Navigation ── */
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 220px;
+}
+
+.nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-col a {
+  text-decoration: none;
+  color: #F9F7F4;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.8;
+  transition: opacity 0.2s;
+}
+
+.nav-col a:hover { opacity: 0.5; }
+
+/* ── Newsletter ── */
+.newsletter-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletter-label {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  padding-bottom: 6px;
+  gap: 8px;
+}
+
+.newsletter-form input {
+  background: none;
+  border: none;
+  outline: none;
+  color: rgba(255,255,255,0.45);
+  font-size: 14px;
+  font-family: 'village-pm', sans-serif;
+  flex: 1;
+  letter-spacing: 0.04em;
+}
+
+.newsletter-form input::placeholder { color: rgba(255,255,255,0.45); }
+
+.arrow-btn {
+  background: none;
+  border: none;
+  color: #F9F7F4;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  padding: 0;
+}
+
+.arrow-btn:hover { opacity: 0.6; transform: translateX(3px); }
+
+/* ── Country Dropdown ── */
+.country-wrapper {
+  position: relative;
+}
+
+.country-col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.country-col:hover { opacity: 0.5; }
+
+.country-arrow {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.country-wrapper.open .country-arrow {
+  transform: rotate(180deg);
+}
+
+.country-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background: #F9F7F4;
+  padding: 8px 0;
+  min-width: 220px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.country-wrapper.open .country-dropdown {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.country-dropdown a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #121212;
+  transition: opacity 0.15s;
+}
+
+.country-dropdown a:hover { opacity: 0.5; }
+
+/* ── Logo ── */
+.footer-logo { overflow: hidden; }
+
+.logo {
+  width: 100%;
+  display: block;
+  margin-bottom: 70px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  footer { padding: 48px 24px 0; }
+
+  .footer-top { justify-content: center; }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 70px;
+  }
+
+  .nav-col,
+  .newsletter-col { padding-bottom: 40px; }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Footer</title>
+  <link rel="stylesheet" href="assets/css/footer.css">
+</head>
+<body>
+<footer>
+  <div>
+    <div class="footer-top">
+      <span id="clock"></span>
+      <span class="greeting-badge" id="greeting">Good morning</span>
+    </div>
+    <nav class="footer-nav">
+      <div class="nav-col">
+        <a href="#">Shop</a>
+      </div>
+      <div class="nav-col">
+        <a href="#">Retailers</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="nav-col">
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+      </div>
+      <div class="newsletter-col">
+        <span class="newsletter-label">Newsletter</span>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Email" />
+          <button class="arrow-btn">→</button>
+        </div>
+      </div>
+      <div class="nav-col country-wrapper">
+        <span class="country-col" id="country-toggle">
+          <span id="country-label">France (€EUR)</span>
+          <span class="country-arrow">↓</span>
+        </span>
+        <div class="country-dropdown" id="country-dropdown">
+          <a href="#" data-country="France (€EUR)">France (€EUR)</a>
+          <a href="#" data-country="United States ($USD)">United States ($USD)</a>
+          <a href="#" data-country="United Kingdom (£GBP)">United Kingdom (£GBP)</a>
+          <a href="#" data-country="German (€EUR)">German (€EUR)</a>
+          <a href="#" data-country="Italy (€EUR)">Italy (€EUR)</a>
+          <a href="#" data-country="Japan (¥JPY)">Japan (¥JPY)</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="footer-logo">
+    <img class="logo" src="assets/img/village-pm-white.png" alt="">
+  </div>
+</footer>
+</body>
+</html>
+<script src="assets/js/footer.js"></script>

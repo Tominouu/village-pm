@@ -107,7 +107,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
 
-    height: 120%;
+    height: 103%;
     width: auto;
 
     object-fit: cover;
@@ -132,14 +132,37 @@ header {
 }
 
 .hero h1 {
-    top: 55%;
+    top: 37%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 120px;
+    font-size: 213px;
 }
 
 .hero p {
-    top: 65%;
+    top: 61%;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 31px;
 }
+
+.section-titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'village-pm', sans-serif;
+}
+
+.section-titles h1 {
+    font-size: 50px;
+}
+
+.section-titles p {
+    max-width: 500px;
+    text-align: center;
+    margin: 0 auto;
+
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.4;
+}
+
+
