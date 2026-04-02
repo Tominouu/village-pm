@@ -19,7 +19,6 @@ footer {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 /* ── Horloge ── */
@@ -32,7 +31,7 @@ footer {
 }
 
 #clock {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.04em;
   color: #F9F7F4;
@@ -55,7 +54,7 @@ footer {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 24px;
   align-items: start;
-  margin-bottom: 80px;
+  margin-bottom: 220px;
 }
 
 .nav-col {
@@ -67,7 +66,7 @@ footer {
 .nav-col a {
   text-decoration: none;
   color: #F9F7F4;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -85,7 +84,7 @@ footer {
 }
 
 .newsletter-label {
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -104,7 +103,7 @@ footer {
   border: none;
   outline: none;
   color: rgba(255,255,255,0.45);
-  font-size: 24px;
+  font-size: 14px;
   font-family: 'village-pm', sans-serif;
   flex: 1;
   letter-spacing: 0.04em;
@@ -116,7 +115,7 @@ footer {
   background: none;
   border: none;
   color: #F9F7F4;
-  font-size: 24px;
+  font-size: 14px;
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.2s, transform 0.2s;
@@ -127,7 +126,7 @@ footer {
 
 /* ── Pays ── */
 .country-col {
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -147,6 +146,23 @@ footer {
 }
 
 .logo{
-  width: 1522px;
+  width: 100%;
   margin-bottom: 70px;
+}
+
+@media (max-width: 768px) {
+  .footer-nav{
+    display: inline-block;
+  }
+  .nav-col, .newsletter-col{
+    padding-bottom: 40px;
+  }
+
+  .footer-top{
+    justify-content: center;
+  }
+
+  .footer-nav{
+    margin-bottom: 70px;
+  }
 }
