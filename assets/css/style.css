@@ -132,14 +132,15 @@ header {
 }
 
 .hero h1 {
-    top: 55%;
+    top: 37%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 120px;
+    font-size: 213px;
 }
 
 .hero p {
-    top: 65%;
+    top: 61%;
     left: 50%;
     transform: translateX(-50%);
+    font-size: 31px;
 }
