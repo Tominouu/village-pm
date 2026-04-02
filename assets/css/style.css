@@ -107,7 +107,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
 
-    height: 120%;
+    height: 103%;
     width: auto;
 
     object-fit: cover;
@@ -144,3 +144,4 @@ header {
     transform: translateX(-50%);
     font-size: 31px;
 }
+
