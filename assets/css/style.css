@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'village-pm';
+    src: url('../fonts/Columbia-Serial\ Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+}
+
+.fond-color {
+    background-color: #A19E7F;
+    height: 100vh;
+}
+
+header {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    gap: 4px;
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 10;
+    font-family: 'village-pm', sans-serif;
+}
+
+.part-1{
+    background-color: black;
+    width: fit-content;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 6px;
+}
+
+.logo-header{
+    width: 100px;
+}
+
+.part-2{
+    display: flex;
+    background-color: black;
+    height: 83px;   
+    width: 43%;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 6px;
+}
+
+.part-2 a {
+    position: relative;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+
+.part-2 a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+
+    transform: scaleX(0);       
+    transform-origin: center;       
+    transition: transform 0.3s ease;
+}
+
+.part-2 a:hover::after {
+    transform: scaleX(1); 
+}
+
+
+.part-2 ul{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 40px;
+    text-decoration: none;
+    padding-right: 40px;
+}
+
+.part-2 li{
+    list-style: none;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'village-pm', sans-serif;
+}
+
+.chaussure-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 120%;
+    width: auto;
+
+    object-fit: cover;
+    z-index: 1;
+}
+
+.logo-hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    z-index: 2;
+}
+
+.hero h1,
+.hero p {
+    position: absolute;
+    z-index: 2;
+    color: white;
+}
+
+.hero h1 {
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+}
+
+.hero p {
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+}
