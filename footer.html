@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Footer</title>
+  <link rel="stylesheet" href="assets/css/footer.css">
+</head>
+<body>
+
+<footer>
+  <div>
+    <div class="footer-top">
+      <span id="clock"></span>
+      <span class="greeting-badge" id="greeting">Good morning</span>
+    </div>
+    <nav class="footer-nav">
+      <div class="nav-col">
+        <a href="#">Shop</a>
+      </div>
+      <div class="nav-col">
+        <a href="#">Retailers</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="nav-col">
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+      </div>
+      <div class="newsletter-col">
+        <span class="newsletter-label">Newsletter</span>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Email" />
+          <button class="arrow-btn">→</button>
+        </div>
+      </div>
+      <div class="nav-col">
+        <span class="country-col">France (€EUR)</span>
+      </div>
+    </nav>
+  </div>
+  <div class="footer-logo">
+    <img class="logo" src="assets/img/village-pm-white.png" alt="">
+  </div>
+</footer>
+
+<script>
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function getGreeting(h) {
+    if (h < 12) return 'Good morning';
+    if (h < 18) return 'Good afternoon';
+    return 'Good evening';
+  }
+
+  function tick() {
+    const now = new Date();
+    const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+    document.getElementById('clock').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+    document.getElementById('greeting').textContent = getGreeting(h);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
