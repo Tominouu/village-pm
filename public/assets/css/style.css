@@ -169,7 +169,7 @@ header {
 /* partie pour le scroll */
 .scroll-3d {
     position: relative;
-    height: 400vh;  
+    height: 700vh;  
     background: black;
     display: flex;
     flex-direction: column;
@@ -198,4 +198,38 @@ header {
     font-size: 3rem;
     color: white;
     pointer-events: none;
+}
+
+/* ===================== */
+/* TEXTES SCROLL 3D */
+/* ===================== */
+
+.text {
+    position: fixed;
+    z-index: 3;
+    color: #121212;
+    opacity: 0;
+    max-width: 320px;
+    font-family: 'village-pm', sans-serif;
+    pointer-events: none;
+}
+
+/* TEXTE 1 (centre haut) */
+.text-1 {
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+/* TEXTE 2 (gauche milieu) */
+.text-2 {
+    top: 55%;
+    left: 8%;
+}
+
+/* TEXTE 3 (droite bas) */
+.text-3 {
+    bottom: 20%;
+    right: 8%;
 }
