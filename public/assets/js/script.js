@@ -141,11 +141,11 @@ gsap.fromTo(canvas,
 
 gsap.to(canvas, {
   opacity: 0,
-  pointerEvents: "none", 
+  pointerEvents: "none",
   scrollTrigger: {
     trigger: ".scroll-3d",
-    start: "center center",  // Commence à mid-scroll
-    end: "bottom center",    // Fin à 3/4 du scroll
+    start: "80% center",  
+    end: "bottom center", // Continue jusqu'à la fin
     scrub: true
   }
 })
