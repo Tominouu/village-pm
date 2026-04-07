@@ -11,7 +11,6 @@ body {
 
 .fond-color {
     background-color: #A19E7F;
-    height: 100vh;
 }
 
 header {
@@ -194,4 +193,3 @@ header {
     color: white;
     pointer-events: none;
 }
-

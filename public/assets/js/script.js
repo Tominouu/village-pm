@@ -10,14 +10,18 @@ const lenis = new Lenis({
   smoothTouch: false
 })
 
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
-requestAnimationFrame(raf)
-
-// connecter à GSAP
+// Connexion Lenis ↔ ScrollTrigger
 lenis.on("scroll", ScrollTrigger.update)
+
+// Animation loop GSAP uniquement (pas de double RAF)
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000)
+})
+
+gsap.ticker.lagSmoothing(0)
+
+// Refresh ScrollTrigger après init Lenis
+ScrollTrigger.refresh()
 
 // =====================
 // CANVAS SETUP
