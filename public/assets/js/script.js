@@ -105,7 +105,7 @@ gsap.to(obj, {
     trigger: ".scroll-3d",
     start: "top top",
     end: "bottom bottom",
-    scrub: 1.5 
+    scrub: 1.5
   },
   onUpdate: render
 })
@@ -124,31 +124,18 @@ gsap.to(obj, {
 })
 
 // =====================
-// FADE IN CANVAS
+// CANVAS OPACITY TIMELINE (une seule animation)
 // =====================
-gsap.fromTo(canvas,
-  { opacity: 0 },
-  {
-    opacity: 1,
-    scrollTrigger: {
-      trigger: ".scroll-3d",
-      start: "top top",
-      end: "top center",
-      scrub: true
-    }
-  }
-)
-
-gsap.to(canvas, {
-  opacity: 0,
-  pointerEvents: "none",
+gsap.timeline({
   scrollTrigger: {
     trigger: ".scroll-3d",
-    start: "80% center",  
-    end: "bottom center", // Continue jusqu'à la fin
+    start: "top top",
+    end: "bottom bottom",
     scrub: true
   }
 })
+  .fromTo(canvas, { opacity: 0 }, { opacity: 1 }, 0)           // Fade in au début
+  .to(canvas, { opacity: 0 }, 0.8)                              // Fade out à 80%
 
 // =====================
 // TEXTE ANIMÉ
