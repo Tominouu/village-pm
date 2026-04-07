@@ -10,17 +10,14 @@ const lenis = new Lenis({
   smoothTouch: false
 })
 
-// Connexion Lenis ↔ ScrollTrigger
 lenis.on("scroll", ScrollTrigger.update)
 
-// Animation loop GSAP uniquement (pas de double RAF)
 gsap.ticker.add((time) => {
   lenis.raf(time * 1000)
 })
 
 gsap.ticker.lagSmoothing(0)
 
-// Refresh ScrollTrigger après init Lenis
 ScrollTrigger.refresh()
 
 // =====================
@@ -39,7 +36,7 @@ window.addEventListener("resize", resizeCanvas)
 // =====================
 // IMAGES
 // =====================
-const frameCount = 120
+const frameCount = 240
 
 const currentFrame = (index) =>
   `../../test-anim/images/${String(index).padStart(4, "0")}.png`
@@ -64,7 +61,7 @@ for (let i = 1; i <= frameCount; i++) {
 }
 
 // =====================
-// RENDER OPTIMISÉ
+// RENDER
 // =====================
 let lastFrame = -1
 
@@ -96,10 +93,10 @@ const render = () => {
 }
 
 // =====================
-// ANIMATION SCROLL
+// ANIMATION SCROLL (frames)
 // =====================
 gsap.to(obj, {
-  frame: frameCount,
+  frame: frameCount - 1,
   ease: "power1.out",
   scrollTrigger: {
     trigger: ".scroll-3d",
@@ -111,7 +108,7 @@ gsap.to(obj, {
 })
 
 // =====================
-// ZOOM PROGRESSIF
+// ZOOM
 // =====================
 gsap.to(obj, {
   zoom: 1.2,
@@ -124,9 +121,14 @@ gsap.to(obj, {
 })
 
 // =====================
-// CANVAS OPACITY TIMELINE (une seule animation)
+// ÉTAT INITIAL
 // =====================
-gsap.timeline({
+gsap.set(canvas, { opacity: 1 })
+
+// =====================
+// TIMELINE PRINCIPALE
+// =====================
+const tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".scroll-3d",
     start: "top top",
@@ -134,21 +136,58 @@ gsap.timeline({
     scrub: true
   }
 })
-  .fromTo(canvas, { opacity: 0 }, { opacity: 1 }, 0)           // Fade in au début
-  .to(canvas, { opacity: 0 }, 0.8)                              // Fade out à 80%
 
 // =====================
-// TEXTE ANIMÉ
+// TEXT 1
 // =====================
-gsap.utils.toArray(".section").forEach((section) => {
-  gsap.from(section, {
-    opacity: 0,
-    y: 100,
-    scrollTrigger: {
-      trigger: section,
-      start: "top 80%",
-      end: "top 30%",
-      scrub: true
-    }
-  })
+tl.fromTo(".text-1",
+  { opacity: 0, y: 50 },
+  { opacity: 1, y: 0 },
+  0
+)
+.to(".text-1",
+  { opacity: 0, y: -50 },
+  0.3
+)
+
+// =====================
+// TEXT 2
+// =====================
+tl.fromTo(".text-2",
+  { opacity: 0, x: -50 },
+  { opacity: 1, x: 0 },
+  0.35
+)
+.to(".text-2",
+  { opacity: 0, x: -50 },
+  0.75
+)
+
+// =====================
+// TEXT 3
+// =====================
+tl.fromTo(".text-3",
+  { opacity: 0, x: 50 },
+  { opacity: 1, x: 0 },
+  0.8
+)
+.to(".text-3",
+  { opacity: 0, x: 50 },
+  1
+)
+
+
+// =====================
+// DISPLAY NONE PROPRE (hors timeline)
+// =====================
+
+ScrollTrigger.create({
+  trigger: ".scroll-3d",
+  start: "bottom bottom", // quand la section est FINIE
+  onLeave: () => {
+    canvas.style.display = "none"
+  },
+  onEnterBack: () => {
+    canvas.style.display = "block"
+  }
 })
