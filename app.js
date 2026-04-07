@@ -8,6 +8,12 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/galerie', (req, res) => {
+  res.render('partials/galerie');
+});
+
+
+
 app.listen(3000, () => {
   console.log('Serveur lancé sur http://localhost:3000');
 });
