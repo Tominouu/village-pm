@@ -105,7 +105,7 @@ gsap.to(obj, {
     trigger: ".scroll-3d",
     start: "top top",
     end: "bottom bottom",
-    scrub: 1.5 // ULTRA SMOOTH 🔥
+    scrub: 1.5 
   },
   onUpdate: render
 })
@@ -131,12 +131,24 @@ gsap.fromTo(canvas,
   {
     opacity: 1,
     scrollTrigger: {
+      trigger: ".scroll-3d",
       start: "top top",
-      end: "+=300",
+      end: "top center",
       scrub: true
     }
   }
 )
+
+gsap.to(canvas, {
+  opacity: 0,
+  pointerEvents: "none", 
+  scrollTrigger: {
+    trigger: ".scroll-3d",
+    start: "center center",  // Commence à mid-scroll
+    end: "bottom center",    // Fin à 3/4 du scroll
+    scrub: true
+  }
+})
 
 // =====================
 // TEXTE ANIMÉ
