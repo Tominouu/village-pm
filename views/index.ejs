@@ -9,86 +9,81 @@
     <link rel="stylesheet" href="assets/css/galerie.css">
 </head>
 <body>
-    <!-- <div class="fond-color"> -->
-        <header>
-            <div class="part-1">
-                <img class="logo-header" src="assets/img/village-pm-white.png" alt="Logo Village PM">
+    <header>
+        <div class="part-1">
+            <img class="logo-header" src="assets/img/village-pm-white.png" alt="Logo Village PM">
+        </div>
+        <div class="part-2">
+            <nav>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Feed</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>1 PM</h1>
+            <p>BEYOND A SHOE</p>
+        </section>
+        <section class="1st-3d" style="background-color: #FAFFFA;">
+            <div class="section-titles">
+                <h1>LIKE A SECOND SKIN</h1>
+                <p>A progressive, precise <br> skateboard shoe for ultimate fit, <br> comfort and support.</p>
             </div>
-            <div class="part-2">
-                <nav>
-                    <ul>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Feed</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </nav>
+        </section>
+        <section class="scroll-3d">
+            <canvas id="canvas"></canvas>
+
+            <div class="text text-1">
+                <h1>LIKE A SECOND SKIN</h1>
+                <p>A progressive, precise <br> skateboard shoe for ultimate fit, <br> comfort and support.</p>
             </div>
-        </header>
-        <main>
-            <section class="hero">
-                <!-- <img src="assets/img/vue_dessus.png" alt="Vue d'ensemble paire" class="chaussure-header"> -->
-                <h1>1 PM</h1>
-                <p>BEYOND A SHOE</p>
-            </section>
-            <section class="1st-3d" style="background-color: #FAFFFA;">
-                <div class="section-titles">
-                    <h1>LIKE A SECOND SKIN</h1>
-                    <p>A progressive, precise <br> skateboard shoe for ultimate fit, <br> comfort and support.</p>
-                </div>
-            </section>
-            <section class="scroll-3d">
-                <canvas id="canvas"></canvas>
 
-                <div class="text text-1">
-                    <h1>LIKE A SECOND SKIN</h1>
-                    <p>A progressive, precise <br> skateboard shoe for ultimate fit, <br> comfort and support.</p>
-                </div>
+            <div class="text text-2">
+                <p>Easy to break in, with soft, sticky climbing rubber that flicks just right wrapped around the toes and heel.</p>
+            </div>
 
-                <div class="text text-2">
-                    <p>Easy to break in, with soft, sticky climbing rubber that flicks just right wrapped around the toes and heel.</p>
-                </div>
+            <div class="text text-3">
+                <p>But the 1PM was designed to go far beyond that. To last an entire day, not just a single session. To transition from one moment to the next, without ever having to change.</p>
+            </div>
 
-                <div class="text text-3">
-                    <p>But the 1PM was designed to go far beyond that. To last an entire day, not just a single session. To transition from one moment to the next, without ever having to change.</p>
-                </div>
+            <div class="scroll-content"></div>
+        </section>
+        <section class="product-viewer">
+            <canvas id="viewer-canvas"></canvas>
 
-                <div class="scroll-content">
-                    <!-- <section class="section">Nouvelle sneaker</section>
-                    <section class="section">Performance ultime</section> -->
-                    <!-- <section class="section">Design futuriste</section> -->
-                </div>
-            </section>
-            <section class="product-viewer">
+            <div class="controls">
+                <button data-frame="0">Overview</button>
+                <button data-frame="60">Comfort</button>
+                <button data-frame="120">Grip</button>
+                <button data-frame="180">Sole</button>
+            </div>
 
-                <canvas id="viewer-canvas"></canvas>
+            <div class="info">
+                <p class="text-display">Description ici</p>
+            </div>
+        </section>
+        <section>
+            <%- include('partials/galerie') %>
+        </section>
+        <section>
+            <%- include('partials/footer') %>
+        </section>
+    </main>
 
-                <div class="controls">
-                    <button data-frame="0">Overview</button>
-                    <button data-frame="60">Comfort</button>
-                    <button data-frame="120">Grip</button>
-                    <button data-frame="180">Sole</button>
-                </div>
+    <!-- SCRIPTS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
 
-                <div class="info">
-                    <p class="text-display">Description ici</p>
-                </div>
-
-            </section>
-            <section>
-                <%- include('partials/galerie') %>
-            </section>
-            <section>
-                <%- include('partials/footer') %>
-            </section>
-        </main>
-    </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
-
-<script src="assets/js/script.js"></script>
-<script src="assets/js/footer.js"></script>
-<script src="assets/js/galerie.js"></script>
+    <!-- THREE.JS MODULE (type="module" obligatoire) -->
+    <script type="module" src="assets/js/script-threejs.js"></script>
+    
+    <!-- Scripts non-module -->
+    <script src="assets/js/footer.js"></script>
+    <script src="assets/js/galerie.js"></script>
 </body>
 </html>
