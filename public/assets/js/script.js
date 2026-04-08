@@ -191,3 +191,28 @@ ScrollTrigger.create({
     canvas.style.display = "block"
   }
 })
+
+const buttons = document.querySelectorAll(".controls button")
+
+const texts = {
+  0: "Vue globale de la chaussure",
+  60: "Confort optimal avec matériaux souples",
+  120: "Grip maximal pour le skate",
+  180: "Semelle technique avancée"
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    const targetFrame = parseInt(btn.dataset.frame)
+
+    gsap.to(obj, {
+      frame: targetFrame,
+      duration: 1,
+      ease: "power2.out",
+      onUpdate: render
+    })
+
+    document.querySelector(".text-display").textContent = texts[targetFrame]
+  })
+})
