@@ -21,7 +21,11 @@ Le serveur :
 - utilise **EJS** comme moteur de vues
 - sert les fichiers statiques depuis le dossier `public`
 
-## Dépendances du projet
+## Librairies externes côté front
+
+- **Three JS** : 3D
+- **GSAP** : bibliothèque JS pour les animations
+- **Scroll Trigger** : plugin GSAP pour les animations au scroll
 
 ### Dépendances principales
 - `express`
