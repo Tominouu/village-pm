@@ -1,14 +1,8 @@
 import * as THREE from 'https://esm.sh/three@r128';
 import { GLTFLoader } from 'https://esm.sh/three@r128/examples/jsm/loaders/GLTFLoader.js';
 
-// =====================
-// REGISTER GSAP PLUGIN
-// =====================
 gsap.registerPlugin(ScrollTrigger)
 
-// =====================
-// LENIS SMOOTH SCROLL
-// =====================
 const lenis = new Lenis({
   duration: 1.2,
   smooth: true,
@@ -24,9 +18,6 @@ gsap.ticker.add((time) => {
 
 gsap.ticker.lagSmoothing(0)
 
-// =====================
-// THREE.JS SCENE SETUP
-// =====================
 const canvas = document.getElementById("canvas")
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xfafffa)
@@ -43,9 +34,6 @@ const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true 
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(window.devicePixelRatio)
 
-// =====================
-// LIGHTING
-// =====================
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
 scene.add(ambientLight)
 
@@ -57,19 +45,15 @@ const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5)
 directionalLight2.position.set(-20, -20, 10)
 scene.add(directionalLight2)
 
-// =====================
-// LOAD 3D MODEL
-// =====================
 const loader = new GLTFLoader()
 let shoe = null
 let modelReady = false
 
-loader.load('assets/models/shoe.glb', (gltf) => {
+loader.load('assets/models/1PM-app.glb', (gltf) => {
   shoe = gltf.scene
   shoe.scale.set(75, 75, 75)
   shoe.position.set(0, 0, 0)
   
-  // ✅ Appliquer les rotations de la première étape
   shoe.rotation.x = Math.PI / 2
   shoe.rotation.y = Math.PI
   shoe.rotation.z = 0
@@ -107,46 +91,33 @@ setTimeout(() => {
   }
 }, 3000)
 
-// =====================
-// ROTATIONS KEYFRAMES - 4 ÉTAPES
-// =====================
-// 1. Top view - bout pointe vers le bas
-// 2. Vue côté - pointe vers la droite
-// 3. Vue dessous (semelle) - légèrement vers gauche
-// 4. Vue de haut - légèrement vers gauche
-
 const rotationKeyframes = [
   { 
     progress: 0.0, 
     rotX: Math.PI / 2,    
     rotY: Math.PI,
-    rotZ: 0,
-    description: "Top view - bout vers le bas"
+    rotZ: 0
   },
   { 
     progress: 0.33, 
     rotX: 0,              
     rotY: -Math.PI / 2,   
-    rotZ: 0,
-    description: "Vue de côté - pointe vers la droite"
+    rotZ: 0
   },
   { 
     progress: 0.66, 
     rotX: -Math.PI / 2,   
     rotY: Math.PI / 6,    
-    rotZ: 0,
-    description: "Vue dessous (semelle) - vers la gauche"
+    rotZ: 0
   },
   { 
     progress: 1.0, 
     rotX: Math.PI / 2,    
     rotY: Math.PI / 6,    
-    rotZ: 0,
-    description: "Vue de haut - vers la gauche"
+    rotZ: 0
   }
 ]
 
-// Fonction pour interpoler les rotations
 function interpolateRotation(progress) {
   let start = rotationKeyframes[0]
   let end = rotationKeyframes[rotationKeyframes.length - 1]
@@ -165,21 +136,14 @@ function interpolateRotation(progress) {
   return {
     rotX: start.rotX + (end.rotX - start.rotX) * localProgress,
     rotY: start.rotY + (end.rotY - start.rotY) * localProgress,
-    rotZ: start.rotZ + (end.rotZ - start.rotZ) * localProgress,
-    description: end.description
+    rotZ: start.rotZ + (end.rotZ - start.rotZ) * localProgress
   }
 }
 
-// =====================
-// STATE & ANIMATION
-// =====================
 const scrollState = {
   progress: 0
 }
 
-// =====================
-// ANIMATION SCROLL AVEC GSAP + ScrollTrigger
-// =====================
 gsap.to(scrollState, {
   progress: 1,
   scrollTrigger: {
@@ -193,28 +157,19 @@ gsap.to(scrollState, {
     if (shoe && modelReady) {
       const progress = scrollState.progress
       
-      // Récupérer les rotations interpolées
       const rotations = interpolateRotation(progress)
       shoe.rotation.x = rotations.rotX
       shoe.rotation.y = rotations.rotY
       shoe.rotation.z = rotations.rotZ
       
-      // Debug: afficher l'étape actuelle
-      console.log(`${Math.round(progress * 100)}% - ${rotations.description}`)
-      
-      // Zoom progressif
       const scale = 75 + progress * 20
       shoe.scale.set(scale, scale, scale)
       
-      // Mouvement Y
       shoe.position.y = Math.sin(progress * Math.PI) * 3
     }
   }
 })
 
-// =====================
-// WINDOW RESIZE
-// =====================
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
@@ -223,9 +178,6 @@ function onWindowResize() {
 
 window.addEventListener('resize', onWindowResize)
 
-// =====================
-// ANIMATION LOOP
-// =====================
 function animate() {
   requestAnimationFrame(animate)
   renderer.render(scene, camera)
@@ -233,9 +185,6 @@ function animate() {
 
 animate()
 
-// =====================
-// TEXT ANIMATIONS (GSAP Timeline)
-// =====================
 const tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".scroll-3d",
@@ -275,9 +224,6 @@ tl.fromTo(".text-3",
   2.5
 )
 
-// =====================
-// HIDE CANVAS WHEN LEAVING SECTION
-// =====================
 ScrollTrigger.create({
   trigger: ".scroll-3d",
   start: "bottom bottom",
@@ -289,21 +235,19 @@ ScrollTrigger.create({
   }
 })
 
-// =====================
-// PRODUCT VIEWER
-// =====================
-const buttons = document.querySelectorAll(".controls button")
 const viewerCanvas = document.getElementById("viewer-canvas")
-
 let viewerScene = null
 let viewerCamera = null
 let viewerRenderer = null
 let viewerShoe = null
-let viewerRotation = 0
+let viewerModelReady = false
+let currentFeatureStep = 0
+let featureAnimationComplete = [false, false, false, false]
+let scrollLocked = true
 
 if (viewerCanvas) {
   viewerScene = new THREE.Scene()
-  viewerScene.background = new THREE.Color(0xfafffa)
+  viewerScene.background = new THREE.Color(0xffffff)
   
   viewerCamera = new THREE.PerspectiveCamera(
     75,
@@ -311,7 +255,7 @@ if (viewerCanvas) {
     0.1,
     2000
   )
-  viewerCamera.position.z = 25
+  viewerCamera.position.z = 20
   
   viewerRenderer = new THREE.WebGLRenderer({ canvas: viewerCanvas, antialias: true })
   viewerRenderer.setSize(viewerCanvas.clientWidth, viewerCanvas.clientHeight)
@@ -320,33 +264,163 @@ if (viewerCanvas) {
   const vAmbient = new THREE.AmbientLight(0xffffff, 0.8)
   viewerScene.add(vAmbient)
   
-  const vDirectional = new THREE.DirectionalLight(0xffffff, 1)
-  vDirectional.position.set(20, 20, 20)
+  const vDirectional = new THREE.DirectionalLight(0xffffff, 1.2)
+  vDirectional.position.set(10, 10, 10)
   viewerScene.add(vDirectional)
   
-  loader.load('assets/models/shoe.glb', (gltf) => {
+  loader.load('assets/models/1PM-app.glb', (gltf) => {
     viewerShoe = gltf.scene
-    viewerShoe.scale.set(60, 60, 60)
+    viewerShoe.scale.set(50, 50, 50)
+    viewerShoe.position.set(0, -2, 0)
     viewerScene.add(viewerShoe)
+    viewerModelReady = true
+    console.log('✅ Viewer Model chargé')
     animateViewer()
-  }, undefined, () => {
-    const geometry = new THREE.BoxGeometry(10, 10, 5)
+  }, undefined, (error) => {
+    console.error('❌ Erreur viewer:', error)
+    createFallbackViewer()
+  })
+  
+  function createFallbackViewer() {
+    console.warn('⚠️ Modèle viewer non trouvé')
+    const geometry = new THREE.BoxGeometry(8, 8, 4)
     const material = new THREE.MeshPhongMaterial({ color: 0x333333, shininess: 100 })
     viewerShoe = new THREE.Mesh(geometry, material)
     viewerScene.add(viewerShoe)
+    viewerModelReady = true
     animateViewer()
-  })
+  }
+  
+  const featureRotations = [
+    {
+      name: "ADJUSTMENT & FIT",
+      description: "Thanks to its 'Rubber Glove' technology, the 1PM uses non-vulcanized rubber that is both flexible, grippy and durable. Hand-shaped, it wraps your foot like a second skin and maintains that perfect fit over time.",
+      rotation: { x: 0, y: 0, z: 0 },
+      zoom: 1
+    },
+    {
+      name: "CONTROL & FEEL",
+      description: "The forefoot, reinforced with a climbing-inspired rubber rand, provides grip and precision where every move counts, while the EVA midsole delivers heel cushioning and a thin profile at the front to preserve ground contact and sensitivity.",
+      rotation: { x: Math.PI / 6, y: Math.PI / 4, z: 0 },
+      zoom: 1.1
+    },
+    {
+      name: "COMFORT & CONVENIENCE",
+      description: "Heel pull tabs make it easy to slip on the 1PM in an instant. Zero seams minimize discomfort, while traditional comfort comes from quality materials throughout.",
+      rotation: { x: -Math.PI / 3, y: Math.PI / 2, z: 0 },
+      zoom: 0.9
+    },
+    {
+      name: "DURABILITY & MATERIALS",
+      description: "Built to last through an entire day, not just a single session. Premium materials and expert construction ensure the 1PM maintains its performance and aesthetic.",
+      rotation: { x: -Math.PI / 2, y: 0, z: 0 },
+      zoom: 1
+    }
+  ]
+  
+  let currentRotation = { x: 0, y: 0, z: 0 }
+  let targetRotation = { x: 0, y: 0, z: 0 }
+  let currentZoom = 1
+  let targetZoom = 1
   
   function animateViewer() {
     requestAnimationFrame(animateViewer)
     
-    if (viewerShoe) {
-      viewerShoe.rotation.y += (viewerRotation - viewerShoe.rotation.y) * 0.1
+    if (viewerShoe && viewerModelReady) {
+      currentRotation.x += (targetRotation.x - currentRotation.x) * 0.08
+      currentRotation.y += (targetRotation.y - currentRotation.y) * 0.08
+      currentRotation.z += (targetRotation.z - currentRotation.z) * 0.08
+      
+      viewerShoe.rotation.x = currentRotation.x
+      viewerShoe.rotation.y = currentRotation.y
+      viewerShoe.rotation.z = currentRotation.z
+      
+      currentZoom += (targetZoom - currentZoom) * 0.08
+      viewerShoe.scale.set(50 * currentZoom, 50 * currentZoom, 50 * currentZoom)
     }
     
     viewerRenderer.render(viewerScene, viewerCamera)
   }
   
+  function switchToFeature(index) {
+    const feature = featureRotations[index]
+    
+    const buttons = document.querySelectorAll(".control-btn")
+    buttons.forEach(b => b.classList.remove('active'))
+    buttons[index].classList.add('active')
+    
+    targetRotation = { ...feature.rotation }
+    targetZoom = feature.zoom
+    
+    featureAnimationComplete[index] = true
+    currentFeatureStep = index
+    
+    const allViewed = featureAnimationComplete.every(v => v)
+    if (allViewed) {
+      scrollLocked = false
+      console.log('✅ TOUTES LES ÉTAPES VUES - SCROLL DÉBLOQUÉ')
+    }
+    
+    console.log(`🎯 ${feature.name} - Visitées: ${featureAnimationComplete.filter(v => v).length}/4`)
+  }
+  
+  const buttons = document.querySelectorAll(".control-btn")
+  
+  buttons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      switchToFeature(index)
+    })
+  })
+
+  const productViewerSection = document.querySelector(".product-viewer")
+  const productViewerSpacer = document.querySelector(".product-viewer-spacer")
+  
+  ScrollTrigger.create({
+    trigger: productViewerSpacer,
+    start: "top top",
+    end: "bottom bottom",
+    onUpdate: (self) => {
+      const progress = self.progress
+      
+      productViewerSection.classList.add('active')
+      
+      const stepsProgress = progress * 4
+      const currentStep = Math.floor(stepsProgress)
+      
+      if (currentStep <= 3) {
+        switchToFeature(currentStep)
+      }
+      
+      if (progress >= 1) {
+        scrollLocked = false
+      } else if (progress > 0) {
+        scrollLocked = true
+      }
+    },
+    onEnter: () => {
+      featureAnimationComplete = [false, false, false, false]
+      scrollLocked = true
+    },
+    onLeaveBack: () => {
+      scrollLocked = false
+      console.log('⬆️ Sortie vers le haut - scroll libéré')
+    },
+    onLeave: () => {
+      productViewerSection.classList.remove('active')
+    }
+  })
+
+  window.addEventListener('wheel', (e) => {
+    const productViewerRect = productViewerSpacer.getBoundingClientRect()
+    const isInSpacer = productViewerRect.top < window.innerHeight && productViewerRect.bottom > 0
+    
+    if (!isInSpacer) return
+    
+    if (e.deltaY > 0 && scrollLocked) {
+      e.preventDefault()
+    }
+  }, { passive: false })
+
   window.addEventListener('resize', () => {
     const width = viewerCanvas.clientWidth
     const height = viewerCanvas.clientHeight
@@ -354,37 +428,13 @@ if (viewerCanvas) {
     viewerCamera.updateProjectionMatrix()
     viewerRenderer.setSize(width, height)
   })
-}
-
-// =====================
-// BUTTON INTERACTIONS
-// =====================
-const texts = {
-  0: "Vue globale de la chaussure",
-  60: "Confort optimal avec matériaux souples",
-  120: "Grip maximal pour le skate",
-  180: "Semelle technique avancée"
-}
-
-buttons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const targetFrame = parseInt(btn.dataset.frame)
-    const targetRotation = (targetFrame / 240) * Math.PI * 2
-    
-    if (viewerShoe) {
-      gsap.to(viewerShoe.rotation, {
-        y: targetRotation,
-        duration: 1,
-        ease: "power2.out"
-      })
+  
+  setTimeout(() => {
+    if (buttons.length > 0) {
+      buttons[0].click()
     }
-    
-    const displayElement = document.querySelector(".text-display")
-    if (displayElement) {
-      displayElement.textContent = texts[targetFrame]
-    }
-  })
-})
+  }, 500)
+}
 
 ScrollTrigger.refresh()
-console.log('✅ Script Three.js chargé avec 4 étapes d\'animation')
+console.log('✅ Script Three.js complet chargé')

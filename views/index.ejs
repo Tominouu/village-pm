@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/galerie.css">
+    <link rel="stylesheet" href="assets/css/product-viewer.css">
 </head>
 <body>
     <header>
@@ -28,12 +29,7 @@
             <h1>1 PM</h1>
             <p>BEYOND A SHOE</p>
         </section>
-        <section class="1st-3d" style="background-color: #FAFFFA;">
-            <div class="section-titles">
-                <h1>LIKE A SECOND SKIN</h1>
-                <p>A progressive, precise <br> skateboard shoe for ultimate fit, <br> comfort and support.</p>
-            </div>
-        </section>
+        
         <section class="scroll-3d">
             <canvas id="canvas"></canvas>
 
@@ -52,20 +48,48 @@
 
             <div class="scroll-content"></div>
         </section>
-        <section class="product-viewer">
-            <canvas id="viewer-canvas"></canvas>
+        
+        <div class="spacer-before-viewer"></div>
+        
+        <section class="product-viewer" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 100;">
+            <div class="viewer-wrapper">
+                <div class="viewer-left">
+                    <h2>A CLOSER LOOK</h2>
+                    <div class="left-content">
+                        <div class="buttons-list">
+                            <button class="control-btn active" data-index="0">
+                                <span class="btn-label">ADJUSTMENT & FIT</span>
+                                <p class="btn-description">Thanks to its "Rubber Glove" technology, the 1PM uses non-vulcanized rubber that is both flexible, grippy and durable. Hand-shaped, it wraps your foot like a second skin and maintains that perfect fit over time.</p>
+                            </button>
+                            <button class="control-btn" data-index="1">
+                                <span class="btn-label">CONTROL & FEEL</span>
+                                <p class="btn-description">The forefoot, reinforced with a climbing-inspired rubber rand, provides grip and precision where every move counts, while the EVA midsole delivers heel cushioning and a thin profile at the front to preserve ground contact and sensitivity.</p>
+                            </button>
+                            <button class="control-btn" data-index="2">
+                                <span class="btn-label">COMFORT & CONVENIENCE</span>
+                                <p class="btn-description">Heel pull tabs make it easy to slip on the 1PM in an instant. Zero seams minimize discomfort, while traditional comfort comes from quality materials throughout.</p>
+                            </button>
+                            <button class="control-btn" data-index="3">
+                                <span class="btn-label">DURABILITY & MATERIALS</span>
+                                <p class="btn-description">Built to last through an entire day, not just a single session. Premium materials and expert construction ensure the 1PM maintains its performance and aesthetic.</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="controls">
-                <button data-frame="0">ADJUSTMENT & FIT</button>
-                <button data-frame="60">CONTROL & FEEL</button>
-                <button data-frame="120">COMFORT & CONVENIENCE</button>
-                <button data-frame="180">DURABILITY & MATERIALS</button>
-            </div>
+                <div class="viewer-divider"></div>
 
-            <div class="info">
-                <p class="text-display">Description ici</p>
+                <div class="viewer-right">
+                    <h2>A CLOSER LOOK</h2>
+                    <div class="canvas-container">
+                        <canvas id="viewer-canvas"></canvas>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <div class="product-viewer-spacer"></div>
+        
         <section>
             <%- include('partials/galerie') %>
         </section>
@@ -74,15 +98,12 @@
         </section>
     </main>
 
-    <!-- SCRIPTS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
 
-    <!-- THREE.JS MODULE (type="module" obligatoire) -->
     <script type="module" src="assets/js/script-threejs.js"></script>
     
-    <!-- Scripts non-module -->
     <script src="assets/js/footer.js"></script>
     <script src="assets/js/galerie.js"></script>
 </body>
