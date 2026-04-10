@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/galerie.css">
 </head>
+
 <body>
     <header>
         <div class="part-1">
@@ -27,7 +29,7 @@
         <section class="hero">
             <h1>1 PM</h1>
         </section>
-        
+
         <section class="scroll-3d">
             <canvas id="canvas"></canvas>
 
@@ -37,23 +39,22 @@
             </div>
 
             <div class="text text-2">
-                <p>Easy to break in, with soft, sticky climbing rubber that flicks just right wrapped around the toes and heel.</p>
+                <p>Easy to break in, with soft, sticky climbing rubber that flicks just right wrapped around the toes
+                    and heel.</p>
             </div>
 
             <div class="text text-3">
-                <p>But the 1PM was designed to go far beyond that. To last an entire day, not just a single session. To transition from one moment to the next, without ever having to change.</p>
+                <p>But the 1PM was designed to go far beyond that. To last an entire day, not just a single session. To
+                    transition from one moment to the next, without ever having to change.</p>
             </div>
 
             <div class="scroll-content"></div>
         </section>
-        
-        <!-- SPACER POUR PERMETTRE LE SCROLL À TRAVERS LE PRODUCT VIEWER FIXE -->
+
         <div class="product-viewer-spacer"></div>
-        
-        <!-- PRODUCT VIEWER (FIXE PENDANT LE SCROLL) -->
+
         <section class="product-viewer">
             <div class="viewer-wrapper">
-                <!-- GAUCHE: BOUTONS + DESCRIPTIONS -->
                 <div class="viewer-left">
                     <h2>A CLOSER LOOK</h2>
                     <div class="left-content">
@@ -63,23 +64,29 @@
                                     <img src="assets/img/arrow.svg" alt="Flèche">
                                     <span class="btn-label">ADJUSTMENT & FIT</span>
                                 </div>
-                                    <p class="btn-description" style="display: none;">Thanks to its “Rubber Glove” technology, the 1PM uses non-vulcanized rubber that is both flexible, grippy and durable.
-                                     Hand-shaped, it wraps your foot like a second skin and maintains that perfect fit over time.</p>
+                                <p class="btn-description" style="display: none;">Thanks to its “Rubber Glove”
+                                    technology, the 1PM uses non-vulcanized rubber that is both flexible, grippy and
+                                    durable.
+                                    Hand-shaped, it wraps your foot like a second skin and maintains that perfect fit
+                                    over time.</p>
                             </button>
                             <button class="control-btn" data-index="1">
                                 <div>
                                     <img src="assets/img/arrow.svg" alt="Flèche">
                                     <span class="btn-label">CONTROL & FEEL</span>
                                 </div>
-                                    <p class="btn-description" style="display: none;">The forefoot, reinforced with a climbing-inspired rubber rand, provides gripo and precision where every move counts,
-                                     while the EVA midsole delivers heel cushioning and a thin profile at the front to preserve ground contact and sensitivity.</p>
+                                <p class="btn-description" style="display: none;">The forefoot, reinforced with a
+                                    climbing-inspired rubber rand, provides gripo and precision where every move counts,
+                                    while the EVA midsole delivers heel cushioning and a thin profile at the front to
+                                    preserve ground contact and sensitivity.</p>
                             </button>
                             <button class="control-btn" data-index="2">
                                 <div>
                                     <img src="assets/img/arrow.svg" alt="Flèche">
                                     <span class="btn-label">COMFORT & CONVENIENCE</span>
                                 </div>
-                                <p class="btn-description" style="display: none;">Heel pull tabs make it easy to slip on, getting the 1PM on in a instant. 
+                                <p class="btn-description" style="display: none;">Heel pull tabs make it easy to slip
+                                    on, getting the 1PM on in a instant.
                                     The result : immediate comfort, with zero comprise on performance.</p>
                             </button>
                             <button class="control-btn" data-index="3">
@@ -87,17 +94,18 @@
                                     <img src="assets/img/arrow.svg" alt="Flèche">
                                     <span class="btn-label">DURABILITY & MATERIALS</span>
                                 </div>
-                                <p class="btn-description" style="display: none;">The durable rubber outsole combines toughness and flexibility to accompany every step over the long haul. Suede leather and natural rubber complete the design
-                                    , offering premium materials built to last while delivering performance and style.</p>
+                                <p class="btn-description" style="display: none;">The durable rubber outsole combines
+                                    toughness and flexibility to accompany every step over the long haul. Suede leather
+                                    and natural rubber complete the design
+                                    , offering premium materials built to last while delivering performance and style.
+                                </p>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- DIVIDER -->
                 <div class="viewer-divider"></div>
 
-                <!-- DROITE: CANVAS 3D -->
                 <div class="viewer-right">
                     <div class="canvas-container">
                         <canvas id="viewer-canvas"></canvas>
@@ -105,7 +113,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section>
             <%- include('partials/galerie') %>
         </section>
@@ -114,16 +122,14 @@
         </section>
     </main>
 
-    <!-- SCRIPTS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.0.45/dist/lenis.min.js"></script>
 
-    <!-- THREE.JS MODULE (type="module" obligatoire) -->
     <script type="module" src="assets/js/script-threejs.js"></script>
-    
-    <!-- Scripts non-module -->
+
     <script src="assets/js/footer.js"></script>
     <script src="assets/js/galerie.js"></script>
 </body>
+
 </html>

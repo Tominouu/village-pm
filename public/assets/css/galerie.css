@@ -76,3 +76,40 @@ body, html {
         0 0 0 10px #111,
         0 0 0 9999px rgba(0, 0, 0, 0.6);
 }
+
+.titre-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 40px;
+    color: white;
+    z-index: 1;
+}
+
+.buttons-gallery {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 223px;
+}
+
+.gallery-btn {
+    background: white;
+    color: #fff;
+    font-size: 14px;
+    padding: 12px 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.fleche-gauche {
+    transform: rotate(180deg);
+    filter: invert();
+}
+
+.fleche-droite {
+    transform: rotate(0deg);
+    filter: invert();
+}
