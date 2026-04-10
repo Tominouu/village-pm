@@ -51,6 +51,13 @@ const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.5)
 directionalLight2.position.set(-20, -20, 10)
 scene.add(directionalLight2)
 
+const bottomLight = new THREE.DirectionalLight(0xffffff, 0.6)
+bottomLight.position.set(0, -25, 10) 
+scene.add(bottomLight)
+
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.7)
+scene.add(hemiLight)
+
 const loader = new GLTFLoader()
 let shoe = null
 let modelReady = false
@@ -373,15 +380,26 @@ if (viewerCanvas) {
     const feature = featureRotations[index]
     
     const buttons = document.querySelectorAll(".control-btn")
-    buttons.forEach(b => b.classList.remove('active'))
-    buttons[index].classList.add('active')
-    
+
+    buttons.forEach((btn, i) => {
+      btn.classList.remove('active')
+
+      const desc = btn.querySelector(".btn-description")
+      if (desc) desc.style.display = "none"
+    })
+
+    const activeBtn = buttons[index]
+    activeBtn.classList.add('active')
+
+    const activeDesc = activeBtn.querySelector(".btn-description")
+    if (activeDesc) activeDesc.style.display = "block"
+
     targetRotation = { ...feature.rotation }
     targetZoom = feature.zoom
-    
+
     featureAnimationComplete[index] = true
     currentFeatureStep = index
-    
+
     console.log(`${feature.name}`)
   }
   
@@ -441,6 +459,7 @@ if (viewerCanvas) {
   setTimeout(() => {
     if (buttons.length > 0) {
       buttons[0].click()
+      switchToFeature(0)
     }
   }, 500)
 }
