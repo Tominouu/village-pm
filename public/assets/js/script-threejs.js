@@ -3,6 +3,9 @@ import { GLTFLoader } from 'https://esm.sh/three@r128/examples/jsm/loaders/GLTFL
 
 gsap.registerPlugin(ScrollTrigger)
 
+// =====================
+// LENIS SMOOTH SCROLL
+// =====================
 const lenis = new Lenis({
   duration: 1.2,
   smooth: true,
@@ -18,6 +21,9 @@ gsap.ticker.add((time) => {
 
 gsap.ticker.lagSmoothing(0)
 
+// =====================
+// MAIN 3D SCENE
+// =====================
 const canvas = document.getElementById("canvas")
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xfafffa)
@@ -60,15 +66,15 @@ loader.load('assets/models/1PM-app.glb', (gltf) => {
   
   scene.add(shoe)
   modelReady = true
-  console.log('✅ Modèle chargé')
+  console.log('Modèle chargé')
   animate()
 }, undefined, (error) => {
-  console.error('❌ Erreur au chargement du modèle:', error)
+  console.error('Erreur au chargement du modèle:', error)
   createFallbackModel()
 })
 
 function createFallbackModel() {
-  console.warn('⚠️ Modèle non trouvé, création d\'une géométrie de test')
+  console.warn('Modèle non trouvé, création d\'une géométrie de test')
   const geometry = new THREE.BoxGeometry(10, 10, 5)
   const material = new THREE.MeshPhongMaterial({ 
     color: 0x333333,
@@ -117,7 +123,7 @@ const rotationKeyframes = [
     rotZ: 0
   }
 ]
-
+    
 function interpolateRotation(progress) {
   let start = rotationKeyframes[0]
   let end = rotationKeyframes[rotationKeyframes.length - 1]
@@ -235,6 +241,9 @@ ScrollTrigger.create({
   }
 })
 
+// =====================
+// VIEWER 3D SETUP
+// =====================
 const viewerCanvas = document.getElementById("viewer-canvas")
 let viewerScene = null
 let viewerCamera = null
@@ -243,23 +252,34 @@ let viewerShoe = null
 let viewerModelReady = false
 let currentFeatureStep = 0
 let featureAnimationComplete = [false, false, false, false]
-let scrollLocked = true
+let scrollLocked = false
 
 if (viewerCanvas) {
   viewerScene = new THREE.Scene()
   viewerScene.background = new THREE.Color(0xffffff)
   
+  const canvasRect = viewerCanvas.getBoundingClientRect()
+  const canvasWidth = window.innerWidth * 0.5 - 40 
+  const canvasHeight = window.innerHeight - 80
+  
   viewerCamera = new THREE.PerspectiveCamera(
     75,
-    viewerCanvas.clientWidth / viewerCanvas.clientHeight,
+    canvasWidth / canvasHeight,
     0.1,
     2000
   )
   viewerCamera.position.z = 20
   
-  viewerRenderer = new THREE.WebGLRenderer({ canvas: viewerCanvas, antialias: true })
-  viewerRenderer.setSize(viewerCanvas.clientWidth, viewerCanvas.clientHeight)
+  viewerRenderer = new THREE.WebGLRenderer({ 
+    canvas: viewerCanvas, 
+    antialias: true,
+    alpha: false,
+    preserveDrawingBuffer: true
+  })
+  
+  viewerRenderer.setSize(canvasWidth, canvasHeight)
   viewerRenderer.setPixelRatio(window.devicePixelRatio)
+  viewerRenderer.setClearColor(0xffffff, 1)
   
   const vAmbient = new THREE.AmbientLight(0xffffff, 0.8)
   viewerScene.add(vAmbient)
@@ -268,23 +288,30 @@ if (viewerCanvas) {
   vDirectional.position.set(10, 10, 10)
   viewerScene.add(vDirectional)
   
+  const vDirectional2 = new THREE.DirectionalLight(0xffffff, 0.5)
+  vDirectional2.position.set(-10, -10, 5)
+  viewerScene.add(vDirectional2)
+  
   loader.load('assets/models/1PM-app.glb', (gltf) => {
     viewerShoe = gltf.scene
     viewerShoe.scale.set(50, 50, 50)
     viewerShoe.position.set(0, -2, 0)
     viewerScene.add(viewerShoe)
     viewerModelReady = true
-    console.log('✅ Viewer Model chargé')
+    console.log('Viewer Model chargé')
     animateViewer()
   }, undefined, (error) => {
-    console.error('❌ Erreur viewer:', error)
+    console.error('Erreur viewer:', error)
     createFallbackViewer()
   })
   
   function createFallbackViewer() {
-    console.warn('⚠️ Modèle viewer non trouvé')
+    console.warn('Modèle viewer non trouvé')
     const geometry = new THREE.BoxGeometry(8, 8, 4)
-    const material = new THREE.MeshPhongMaterial({ color: 0x333333, shininess: 100 })
+    const material = new THREE.MeshPhongMaterial({ 
+      color: 0x333333, 
+      shininess: 100
+    })
     viewerShoe = new THREE.Mesh(geometry, material)
     viewerScene.add(viewerShoe)
     viewerModelReady = true
@@ -294,13 +321,13 @@ if (viewerCanvas) {
   const featureRotations = [
     {
       name: "ADJUSTMENT & FIT",
-      description: "Thanks to its 'Rubber Glove' technology, the 1PM uses non-vulcanized rubber that is both flexible, grippy and durable. Hand-shaped, it wraps your foot like a second skin and maintains that perfect fit over time.",
+      description: "Thanks to its 'Rubber Glove' technology, the 1PM uses non-vulcanized rubber that is both flexible, grippy and durable. Hand-shaped, it wraps your foot like a second skin.",
       rotation: { x: 0, y: 0, z: 0 },
       zoom: 1
     },
     {
       name: "CONTROL & FEEL",
-      description: "The forefoot, reinforced with a climbing-inspired rubber rand, provides grip and precision where every move counts, while the EVA midsole delivers heel cushioning and a thin profile at the front to preserve ground contact and sensitivity.",
+      description: "The forefoot, reinforced with a climbing-inspired rubber rand, provides grip and precision where every move counts, while the EVA midsole delivers heel cushioning.",
       rotation: { x: Math.PI / 6, y: Math.PI / 4, z: 0 },
       zoom: 1.1
     },
@@ -355,13 +382,7 @@ if (viewerCanvas) {
     featureAnimationComplete[index] = true
     currentFeatureStep = index
     
-    const allViewed = featureAnimationComplete.every(v => v)
-    if (allViewed) {
-      scrollLocked = false
-      console.log('✅ TOUTES LES ÉTAPES VUES - SCROLL DÉBLOQUÉ')
-    }
-    
-    console.log(`🎯 ${feature.name} - Visitées: ${featureAnimationComplete.filter(v => v).length}/4`)
+    console.log(`${feature.name}`)
   }
   
   const buttons = document.querySelectorAll(".control-btn")
@@ -372,6 +393,9 @@ if (viewerCanvas) {
     })
   })
 
+  // =====================
+  // SCROLL TRIGGER POUR PRODUCT VIEWER
+  // =====================
   const productViewerSection = document.querySelector(".product-viewer")
   const productViewerSpacer = document.querySelector(".product-viewer-spacer")
   
@@ -390,43 +414,28 @@ if (viewerCanvas) {
       if (currentStep <= 3) {
         switchToFeature(currentStep)
       }
-      
-      if (progress >= 1) {
-        scrollLocked = false
-      } else if (progress > 0) {
-        scrollLocked = true
-      }
     },
     onEnter: () => {
+      console.log('Entrée dans le product-viewer')
       featureAnimationComplete = [false, false, false, false]
-      scrollLocked = true
     },
     onLeaveBack: () => {
-      scrollLocked = false
-      console.log('⬆️ Sortie vers le haut - scroll libéré')
+      productViewerSection.classList.remove('active')
+      console.log('Sortie vers le haut - scroll libéré')
     },
     onLeave: () => {
       productViewerSection.classList.remove('active')
+      console.log('Sortie vers le bas')
     }
   })
 
-  window.addEventListener('wheel', (e) => {
-    const productViewerRect = productViewerSpacer.getBoundingClientRect()
-    const isInSpacer = productViewerRect.top < window.innerHeight && productViewerRect.bottom > 0
-    
-    if (!isInSpacer) return
-    
-    if (e.deltaY > 0 && scrollLocked) {
-      e.preventDefault()
-    }
-  }, { passive: false })
-
   window.addEventListener('resize', () => {
-    const width = viewerCanvas.clientWidth
-    const height = viewerCanvas.clientHeight
-    viewerCamera.aspect = width / height
+    const newCanvasWidth = window.innerWidth * 0.5 - 40
+    const newCanvasHeight = window.innerHeight - 80
+    
+    viewerCamera.aspect = newCanvasWidth / newCanvasHeight
     viewerCamera.updateProjectionMatrix()
-    viewerRenderer.setSize(width, height)
+    viewerRenderer.setSize(newCanvasWidth, newCanvasHeight)
   })
   
   setTimeout(() => {
@@ -437,4 +446,4 @@ if (viewerCanvas) {
 }
 
 ScrollTrigger.refresh()
-console.log('✅ Script Three.js complet chargé')
+console.log('Script Three.js complet chargé')
